@@ -29,7 +29,13 @@ Map the concept to something physical or familiar.
 
 - Explain the mechanism. Use "think of it as..." phrasing if helpful.
 - If there are multiple components, break it down and explain how they work together.
-- Always provide a diagram when explaining. Visuals are more memorable than text.
+- Always produce a diagram using Excalidraw — visuals are more memorable than text.
+
+### Diagram steps (always follow this order)
+
+1. Call `mcp__claude_ai_Excalidraw__read_me` to load the element format reference.
+2. Call `mcp__claude_ai_Excalidraw__create_view` to render the diagram inline.
+3. Call `mcp__claude_ai_Excalidraw__export_to_excalidraw` to generate a shareable URL for the developer to save or revisit.
 
 ## 5. Connect to the current project
 
