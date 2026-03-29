@@ -33,6 +33,7 @@ a concept. Claude Code's job here is to be a solution architect to design and te
 - Add `XML` comments where necessary and inline comments if code is too technical.
 - After each file, explain what it does in the context of the concept.
 - After all files are done, demo a sample curl with expected behaviour response.
+- Run the `simplify` skill to review and refine the implemented code before committing.
 - Use the `git-commit` skill to commit when the point is complete
 
 ### Expectation for each module
@@ -56,3 +57,4 @@ a concept. Claude Code's job here is to be a solution architect to design and te
 
 - `/git-commit` — stage and commit using Conventional Commits (you invoke this, not Claude)
 - `/explaining-concepts` — explain any concept with analogy-first teaching style
+- `/simplify` — review and refine recently modified code for quality and efficiency (run after all files in Phase 3 are done)
