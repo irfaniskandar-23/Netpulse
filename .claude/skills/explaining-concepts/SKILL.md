@@ -5,7 +5,8 @@ description: Teaches software architecture and programming concepts using a stru
 
 ## IMPORTANT
 
-when suggesting actual implementation and concept, always refer to Microsoft Documentation and best practices as the source of truth. Do not suggest any implementation that is not aligned with Microsoft documentation or best practices. Always refer to Microsoft documentation and best practices when suggesting implementation and concept.
+- Always refer to Microsoft documentation and best practices as the source of truth for implementation and concepts.
+- Do not reinvent the wheel when Microsoft already provided an interface for that particular use case.
 
 # Explaining concepts
 
