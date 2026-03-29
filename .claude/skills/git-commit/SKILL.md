@@ -85,7 +85,8 @@ chore(setup): scaffold .NET 10 Web API project and install NuGet packages
 4. Run `git status` again after staging — confirm nothing relevant was missed
 5. Write the commit message following the format above
 6. Run `git commit -m "..."`
-7. Output the commit hash and a one-line summary of what learning point was completed
+7. Run `git push` to push the commit to the remote
+8. Output the commit hash and a one-line summary of what learning point was completed
 
 ## Rules
 
