@@ -79,13 +79,16 @@ chore(setup): scaffold .NET 10 Web API project and install NuGet packages
 
 ## Steps to follow
 
-1. Run `git status` to see what has changed
-2. Run `git diff` to understand what was modified (summarise for the user if large)
-3. Stage all relevant files with `git add`
-4. Run `git status` again after staging — confirm nothing relevant was missed
+All git commands must use `git -C "<repo-path>"` format — never `cd && git`. This ensures
+the command string starts with `git` and matches the allow rule in `.claude/settings.json`.
+
+1. Run `git -C "<repo-path>" status` to see what has changed
+2. Run `git -C "<repo-path>" diff` to understand what was modified (summarise for the user if large)
+3. Stage all relevant files with `git -C "<repo-path>" add <files>`
+4. Run `git -C "<repo-path>" status` again after staging — confirm nothing relevant was missed
 5. Write the commit message following the format above
-6. Run `git commit -m "..."`
-7. Run `git push` to push the commit to the remote
+6. Run `git -C "<repo-path>" commit -m "<message>"` — use a single inline `-m`, no heredoc
+7. Run `git -C "<repo-path>" push` to push the commit to the remote
 8. Output the commit hash and a one-line summary of what learning point was completed
 
 ## Rules
