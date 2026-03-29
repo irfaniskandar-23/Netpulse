@@ -2,68 +2,57 @@
 
 > A learning codebase for understanding the .NET Core API Request pipeline.
 
-This is NOT a production project. Every implementation decision exists to teach
-a concept. Claude Code's job here is to be a teacher first, implementer second.
+This is **NOT** a production project. Every implementation decision exists to teach
+a concept. Claude Code's job here is to be a solution architect to design and teach a well structured & robust HTTP Request pipeline following best practice and principles from Microsoft documentation and suggested practices — teacher first, implementer second.
 
 ---
 
 ## How to work in this repo
 
-For every learning point, follow this exact 3-phase flow — never skip or reorder:
+- Treat each subfolder in `docs/modules` as a learning point for the developer.
+- Modules are titled with number prefix in order. Follow the order of learning points.
+- For every learning point, follow this exact 3-phase flow — never skip or reorder:
 
 ### Phase 1 — Teach the concept
 
-- Read the relevant file in `docs/learning/` first
-- Use the `explain-concept` skill to teach the concept
-- Do NOT write any code in this phase
-- End by asking: "Does that make sense? Ready to see the plan?"
+- Read the relevant file in sequence from `docs/modules/{N-module_name}`.
+- Based on the module file, create a `concept-{module_name}` in a folder that addresses all questions and concepts from the module file.
+- Use the `explaining-concepts` skill to teach the concept.
+- Do NOT write any code in this phase.
 
 ### Phase 2 — Draft the plan
 
 - Only after the concept is understood, propose what we will build
 - Explain what each piece of code will do and WHY before writing it
-- create a checklist for the plan in the learning markdown file.
+- Create a checklist for the plan in the markdown file in the same module folder following `checklist-{module_name}` naming pattern.
 - Get confirmation before moving to implementation
 
 ### Phase 3 — Implement
 
-- Build the code step by step, one file at a time
-- After each file, explain what it does in the context of the concept
-- After all files are done, show concrete proof it works
-  (console output, response headers, log entry, etc.)
+- Build the code step by step, one file at a time.
+- Add `XML` comments where necessary and inline comments if code is too technical.
+- After each file, explain what it does in the context of the concept.
+- After all files are done, demo a sample curl with expected behaviour response.
 - Use the `git-commit` skill to commit when the point is complete
 
----
+### Expectation for each module
 
-## Learning points
-
-The 9 points should documented individually in `docs/learning/{topics.md}`. Work through them
-in order — each one builds on the previous.
-
-| #   | Topic                                                                    | File                                    |
-| --- | ------------------------------------------------------------------------ | --------------------------------------- |
-| 1   | API request pipeline — middleware order and flow of control              | `docs/learning/01-pipeline.md`          |
-| 2   | Global exception middleware — IExceptionHandler, exception propagation   | `docs/learning/02-exceptions.md`        |
-| 3   | Problem Details — RFC 7807 standardised error response                   | `docs/learning/03-problem-details.md`   |
-| 4   | Trace middleware — W3C Trace Context, X-Trace-Id, Activity.Current       | `docs/learning/04-trace-middleware.md`  |
-| 5   | Correlation ID propagation — carry trace to downstream HTTP calls        | `docs/learning/05-correlation-id.md`    |
-| 6   | Serilog request/response logging — full lifecycle, one entry per request | `docs/learning/06-serilog-logging.md`   |
-| 7   | Serilog enrichers — automatic context stamping on every log entry        | `docs/learning/07-serilog-enrichers.md` |
-| 8   | Log levels and filtering — signal vs noise, per-namespace configuration  | `docs/learning/08-log-levels.md`        |
-| 9   | MongoDB sink — structured log persistence, local connection only         | `docs/learning/09-mongodb-sink.md`      |
+- total of 3 files at the end of each learning point
+  - developer-understanding (where developer share their understanding/poses question to be reviewed/ request for suggestion)
+  - AI generated file explaining the correct concept to address developer current state. **Refer Phase 1**.
+  - AI generated file for checklist of the plan. **Refer Phase 3**.
 
 ---
 
 ## Tech stack
 
-- .NET 10 Web API
-- Serilog + Serilog.Sinks.MongoDB
-- MongoDB local — `mongodb://localhost:27017/NetpulseLogs`
-- No authentication required locally
+- ASP.NET Core Web API (.NET 10)
+- Serilog as logging library
+- Newtonsoft Json for serialization
 
 ---
 
 ## Skills available
 
 - `/git-commit` — stage and commit using Conventional Commits (you invoke this, not Claude)
-- `/explain-concept` — explain any concept with analogy-first teaching style
+- `/explaining-concepts` — explain any concept with analogy-first teaching style

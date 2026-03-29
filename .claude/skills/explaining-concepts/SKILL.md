@@ -3,6 +3,10 @@ name: explaining-concepts
 description: Teaches software architecture and programming concepts using a structured analogy-first approach. Use when the user says "explain X", "what is X", "how does X work", "I don't understand X", or before implementing any learning point.
 ---
 
+## IMPORTANT
+
+when suggesting actual implementation and concept, always refer to Microsoft Documentation and best practices as the source of truth. Do not suggest any implementation that is not aligned with Microsoft documentation or best practices. Always refer to Microsoft documentation and best practices when suggesting implementation and concept.
+
 # Explaining concepts
 
 Always follow this 7-step structure. Do not skip steps or reorder them.
@@ -17,16 +21,19 @@ Map the concept to something physical or familiar.
 
 ## 3. The problem it solves
 
-Why does this concept exist? What was broken before it?
+- Explain the problem overview first, then the details.
+- How does this concept solve the problem?
+- Impact of not using this concept? What can go wrong? Use real-world examples if possible.
 
 ## 4. How it works
 
-Explain the mechanism. Use "think of it as..." phrasing if helpful.
+- Explain the mechanism. Use "think of it as..." phrasing if helpful.
+- If there are multiple components, break it down and explain how they work together.
+- Always provide a diagram when explaining. Visuals are more memorable than text.
 
 ## 5. Connect to the current project
 
 Read CLAUDE.md and relate the concept to real file names and decisions already made.
-If no CLAUDE.md exists, ask the user for context first.
 
 ## 6. Code example
 

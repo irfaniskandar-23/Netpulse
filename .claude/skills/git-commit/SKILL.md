@@ -24,23 +24,22 @@ Use Conventional Commits: https://www.conventionalcommits.org
 ### Types
 
 - `feat` — a new implementation (new middleware, new class)
-- `learn` — a learning checkpoint (concept understood, documented)
+- `learn` — Phase 1 or Phase 2 output (concept file, checklist — no runnable code)
 - `refactor` — restructuring without behaviour change
 - `fix` — fixing a bug
-- `docs` — CLAUDE.md, README, or comments only
+- `docs` — module markdown files, concept files, checklists
 - `chore` — tooling, packages, project setup
 
-### Scopes (use these, don't invent new ones)
+### Scopes (use these, don't invent new ones without updating this file)
 
 - `pipeline` — middleware order, Program.cs, request flow
 - `exceptions` — GlobalExceptionHandler, DomainExceptions
-- `problemdetails` — RFC 7807 response format
+- `response` — API response structure, ProblemDetails, DTOs
 - `tracing` — TraceIdMiddleware, W3C Trace Context
 - `correlation` — downstream HTTP propagation
 - `logging` — Serilog configuration, RequestEnricher
-- `enrichers` — Serilog enrichers
-- `mongodb` — MongoDB sink, log models
 - `skills` — .claude/skills changes
+- `config` — CLAUDE.md, settings.json, .claude/ non-skill changes
 - `setup` — repo setup, project scaffold, packages
 
 ### Examples
@@ -66,6 +65,15 @@ Learning point 2 complete.
 ```
 
 ```
+learn(pipeline): document middleware order concept and checklist
+
+Covers how ASP.NET Core processes requests through the middleware
+pipeline and why order matters. Includes concept file and build plan.
+
+Learning point 1 — Phase 2 complete.
+```
+
+```
 chore(setup): scaffold .NET 10 Web API project and install NuGet packages
 ```
 
@@ -74,9 +82,10 @@ chore(setup): scaffold .NET 10 Web API project and install NuGet packages
 1. Run `git status` to see what has changed
 2. Run `git diff` to understand what was modified (summarise for the user if large)
 3. Stage all relevant files with `git add`
-4. Write the commit message following the format above
-5. Run `git commit -m "..."`
-6. Confirm with the user what was committed and what learning point it completes
+4. Run `git status` again after staging — confirm nothing relevant was missed
+5. Write the commit message following the format above
+6. Run `git commit -m "..."`
+7. Output the commit hash and a one-line summary of what learning point was completed
 
 ## Rules
 
