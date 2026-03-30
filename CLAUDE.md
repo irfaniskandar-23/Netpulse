@@ -17,6 +17,8 @@ a concept. Claude Code's job here is to be a solution architect to design and te
 
 - Read the relevant file in sequence from `docs/modules/{N-module_name}`.
 - Based on the module file, create a `concept-{module_name}` in a folder that addresses all questions and concepts from the module file.
+- The concept file must address the developer's questions AND teach the complete concept — covering what the developer doesn't yet know to ask.
+- At the end of the concept file, include a **Microsoft References** section with direct links to the official Microsoft documentation relevant to the module.
 - Use the `explaining-concepts` skill to teach the concept.
 - Do NOT write any code in this phase.
 
