@@ -11,7 +11,7 @@ namespace Netpulse.Api.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class OrdersController(IHostEnvironment env) : ControllerBase
+public class OrdersController : ControllerBase
 {
     // Fake data boundary — ids above this threshold simulate a "not found" domain scenario
     private const int MaxValidOrderId = 100;
@@ -34,7 +34,6 @@ public class OrdersController(IHostEnvironment env) : ControllerBase
 
     /// <summary>
     /// Deliberately throws a system exception to simulate an unexpected failure.
-    /// Development only — returns 404 in any other environment.
     ///
     /// Before module 02: leaks raw exception detail to the client.
     /// After module 02: returns a generic 500 ProblemDetails response.
@@ -42,9 +41,6 @@ public class OrdersController(IHostEnvironment env) : ControllerBase
     [HttpGet("crash")]
     public IActionResult Crash()
     {
-        if (!env.IsDevelopment())
-            return NotFound();
-
         throw new InvalidOperationException("Simulated system failure — something broke unexpectedly.");
     }
 }

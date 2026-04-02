@@ -232,11 +232,18 @@ via `RequestAborted` cancellation, which is exactly this token.
    `Program.cs` alongside your handler registration. This configures the built-in
    ProblemDetails serialisation support.
 
-3. **Environment-specific detail** — expose stack traces only in Development:
+3. **Environment-specific detail** — handle this at the registration level in `Program.cs`,
+   not inside the handler:
 
    ```csharp
-   Detail = env.IsDevelopment() ? exception.ToString() : "An unexpected error occurred"
+   // Program.cs — cleaner separation of concerns
+   if (app.Environment.IsDevelopment())
+       app.UseDeveloperExceptionPage(); // full detail, built-in
+   else
+       app.UseExceptionHandler();       // GlobalExceptionHandler, clean ProblemDetails
    ```
+
+   The handler itself stays free of any `IHostEnvironment` dependency.
 
 4. **`OperationCanceledException` is not a system error** — if the client cancels the
    request (navigates away, timeout), ASP.NET Core throws `OperationCanceledException`.
@@ -278,13 +285,15 @@ public async Task<IActionResult> GetOrder(int id)
     // ResourceNotFoundException thrown by service bubbles to GlobalExceptionHandler
 }
 
-// GlobalExceptionHandler — one place, consistent ProblemDetails shape
+// Program.cs — environment decision lives here, not inside the handler
+if (app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage(); // built-in, shows full stack trace in dev
+else
+    app.UseExceptionHandler();       // GlobalExceptionHandler runs in production only
+
+// GlobalExceptionHandler — no environment coupling, always returns clean ProblemDetails
 public class GlobalExceptionHandler : IExceptionHandler
 {
-    private readonly IHostEnvironment _env;
-
-    public GlobalExceptionHandler(IHostEnvironment env) => _env = env;
-
     public async ValueTask<bool> TryHandleAsync(
         HttpContext context,
         Exception exception,
@@ -305,10 +314,9 @@ public class GlobalExceptionHandler : IExceptionHandler
         {
             Status = status,
             Title  = title,
-            // System errors: generic message to client, real detail stays in logs
-            Detail = status == 500 && !_env.IsDevelopment()
-                ? "An unexpected error occurred"
-                : exception.Message
+            Detail = exception.Message
+            // Safe to use exception.Message — in production this handler only runs
+            // because UseDeveloperExceptionPage is not registered
         };
 
         context.Response.StatusCode = status;
